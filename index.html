@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+
+<html>
+
+
+<head>
+
+    <meta charset="utf-8">
+    <title>Bing News</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="Bing News" content="Top News Stories">
+    <meta name="JUSTIN PAOLETTA" content="The Latest News From Bing">
+    <link href="https://fonts.googleapis.com/css?family=News+Cycle&display=swap" rel="stylesheet">
+    <!-- <link rel="stylesheet" href="bing.css"> -->
+    <style>
+        body {
+            position: absolute;
+        }
+
+        #top {
+            text-align: center;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: rgb(250, 250, 250);
+            height: 16vh;
+            z-index: 2;
+            display: inline-flex;
+        }
+
+        #top p {
+            font-family: 'News Cycle', sans-serif;
+            font-size: 2rem;
+            margin-left: 100px;
+        }
+        
+        #top img{
+            width:400px;
+            margin-left:30px;
+        }
+
+        ul {
+            line-height: 28px;
+            position: fixed;
+            top: 20vh;
+            left: 15px;
+            overflow-y: scroll;
+            width: 12vw;
+            height: 55vh;
+            border-right: 1px black solid;
+            padding-top: 10vh;
+        }
+
+        ul img{
+            height:20px;
+            margin-right: 1vw;
+        }
+
+        .expand:before {
+            content: '\25B9';
+            margin-left: -20px;
+            margin-right: 10px;
+        }
+
+        .hideSubCat {
+            display: none;
+            margin-left: 15px;
+        }
+
+        #news {
+            position: relative;
+            width: 68vw;
+            top: 20vh;
+            left: 18vw;
+            overflow-y: scroll;
+        }
+
+        .newsStory{
+            display: block;
+            border:1px solid grey;
+            width:55vw;
+            margin-top: 2vh;
+        }
+
+        #lastStory{
+            margin-bottom: 20vh;
+        }
+
+        .newsStory img{
+            padding:1rem;
+        }
+
+        .headline{
+            margin-left: 10vw;
+            position: absolute;
+            margin-top: -16vh;
+            width:44vw;
+            font-weight: bolder;
+            font-size: 1.1rem;
+        }
+
+        .text{
+            position: absolute;
+            margin-left: 10vw;
+            width:40vw;
+            margin-top: -10vh;
+        }
+
+        .link{
+            padding-left: 1rem;
+            text-decoration: none;
+            color: #00809D;
+        }
+
+        #weatherSect {
+            margin-top: 12vh;
+            border-left: 1px solid black;
+            height: 70vh;
+            position: fixed;
+            right: 0;
+            top: 40px;
+            width: 20vw;
+            line-height: 15px;
+        }
+        #weatherSect p {
+            font-family: 'News Cycle', sans-serif;
+            margin-left: 2vw;
+        }
+
+        #coordinates{
+            background-color: rgb(199, 206, 212);
+            display: none;
+            position: fixed;
+            margin-top: -40px;
+            margin-left: 4vw !important;
+            padding:.5rem;
+        }
+
+        #sourceImg{
+            width:240px;
+        }
+
+        #temp_max{
+            color: red;
+            font-weight: bolder;
+        }
+
+        #temp_min{
+            color: blue;
+            font-weight: bolder;
+        }
+
+      .weatherIcons{
+          margin-top: -3px;
+          height: 20px;
+          width:20px;
+      }
+
+        #bottom {
+            background-color: rgb(243, 243, 243);
+            z-index: 2;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            padding-left: 2vw;
+            height:50px;
+           
+        }
+
+        #bottom p {
+            padding-left: 1vw;
+        }
+
+        #bottom img {
+            height: 20px;
+        }
+        .stocks{
+            display: inline-flex;
+            padding-left: 2vw;
+        }
+        #yahoo{
+            height:50px;
+            position: fixed;
+            bottom: 0;
+            right: 0;
+            background-color: rgb(134, 56, 145);
+            z-index: 3;
+            padding-left:1rem;
+            padding-right:1rem;
+            color:white;
+        }
+    </style>
+</head>
+
+<div id="top">
+    <p>Today Powered By</p>
+    <img src="bing_news.png">
+</div>
+
+<!-- <form>
+    <input id="newsCat" type="text">
+    <button type="button" id="getNews">News Category</button>
+</form> -->
+
+
+
+<ul style="list-style: none;">
+    <li class="categories"><img src="business.png">Business</li>
+
+    <li class="categories expand" id="Entertainment">Entertainment</li>
+    <li class="hideSubCat" id="E1">Movies & Tv</li>
+    <li class="hideSubCat" id="E2">Music</li>
+
+    <li class="categories"><img src="health.png">Health</li>
+    <li class="categories"><img src="politics.png">Politics</li>
+    <li class="categories"><img src="products.png">Products</li>
+    <li class="categories"><img src="science.png">Science</li>
+    <li class="categories"><img src="technology.png">Technology</li>
+
+    <li class="categories expand" id="Sports">Sports</li>
+    <li class="hideSubCat sports" id="S1">Golf</li>
+    <li class="hideSubCat sports" id="S2">MLB</li>
+    <li class="hideSubCat sports" id="S3">NBA</li>
+    <li class="hideSubCat sports" id="S4">NFL</li>
+    <li class="hideSubCat sports" id="S5">NHL</li>
+    <li class="hideSubCat sports" id="S6">Soccer</li>
+    <li class="hideSubCat sports" id="S7">Tennis</li>
+    <li class="hideSubCat sports" id="S8">CFB</li>
+    <li class="hideSubCat sports" id="S9">CBB</li>
+
+    <li class="categories expand" id="US">US</li>
+    <li class="hideSubCat" id="US1">Northeast</li>
+    <li class="hideSubCat" id="US2">South</li>
+    <li class="hideSubCat" id="US3">Midwest</li>
+    <li class="hideSubCat" id="US4">West</li>
+
+    <li class="categories expand" id="World">World</li>
+    <li class="hideSubCat" id="World1">Africa</li>
+    <li class="hideSubCat" id="World2">Americas</li>
+    <li class="hideSubCat" id="World3">Asia</li>
+    <li class="hideSubCat" id="World4">Europe</li>
+    <li class="hideSubCat" id="World5">MiddleEast</li>
+</ul>
+
+<div id="news">
+    <div class="newsStory">
+        <img id="newsImg1" src="">
+        <p class="headline" id="headline"></p>
+        <p class="text" id="text"></p>
+        <p><a class="link" id="link" href="">Read Full Story</a></p>
+    </div>
+    <div class="newsStory">
+        <img id="newsImg2" src="">
+        <p class="headline" id="headline2"></p>
+        <p class="text" id="text2"></p>
+        <p><a class="link" id="link2" href="">Read Full Story</a></p>
+    </div>
+    <div class="newsStory">
+        <img id="newsImg3" src="">
+        <p class="headline" id="headline3"></p>
+        <p class="text" id="text3"></p>
+        <p><a class="link" id="link3" href="">Read Full Story</a></p>
+    </div>
+    <div class="newsStory">
+        <img id="newsImg4" src="">
+        <p class="headline" id="headline4"></p>
+        <p class="text" id="text4"></p>
+        <p><a class="link" id="link4" href="">Read Full Story</a></p>
+    </div>
+    <div class="newsStory">
+        <img id="newsImg5" src="">
+        <p class="headline" id="headline5"></p>
+        <p class="text" id="text5"></p>
+        <p><a class="link" id="link5" href="">Read Full Story</a></p>
+    </div>
+    <div class="newsStory">
+        <img id="newsImg6" src="">
+        <p class="headline" id="headline6"></p>
+        <p class="text" id="text6"></p>
+        <p><a class="link" id="link6" href="">Read Full Story</a></p>
+    </div>
+    <div class="newsStory">
+        <img id="newsImg7" src="">
+        <p class="headline" id="headline7"></p>
+        <p class="text" id="text7"></p>
+        <p><a class="link" id="link7" href="">Read Full Story</a></p>
+    </div>
+    <div class="newsStory">
+        <img id="newsImg8" src="">
+        <p class="headline" id="headline8"></p>
+        <p class="text" id="text8"></p>
+        <p><a class="link" id="link8" href="">Read Full Story</a></p>
+    </div>
+    <div class="newsStory">
+        <img id="newsImg9" src="">
+        <p class="headline" id="headline9"></p>
+        <p class="text" id="text9"></p>
+        <p><a class="link" id="link9" href="">Read Full Story</a></p>
+    </div>
+    <div class="newsStory" id ="lastStory">
+        <img id="newsImg10" src="">
+        <p class="headline" id="headline10"></p>
+        <p class="text" id="text10"></p>
+        <p><a class="link" id="link10" href="">Read Full Story</a></p>
+    </div>
+    
+</div>
+<div id="weatherSect">
+    <div>
+        <img id="sourceImg" src="openweather.png">
+    </div>
+    <div style="display: inline-flex;">
+        <img style="height:30px; widows: 25px; margin-left: 30px; margin-top: 10px;" src = "clear.png">
+        <p id="name"></p>
+        <p id="coordinates"></p>
+    </div>
+    <div>
+        <p style="margin-left: 80px; margin-top: 0px;" id="weather"></p>
+    </div>
+    <div style="margin-top: 30px;">
+        <p id="temp"></p>
+    </div>
+    <div style="display: inline-flex;">
+        <p id="temp_max"></p>
+        <p id="temp_min"></p>
+    </div>
+    <div style="display: inline-flex;">
+        <p><img class="weatherIcons" src="sunrise.png"></p>
+        <p id="sunrise"></p>   
+    </div>
+    <div style="display: inline-flex;">
+        <p><img class="weatherIcons" src="sunset.png"></p>
+        <p id="sunset"></p>   
+    </div>
+    <div style="display: inline-flex; font-size:.8rem;">
+        <p id="humidity"></p>
+        <p><img class="weatherIcons" src="humid.png"></p>
+    </div>
+    <div style="display: inline-flex; font-size:.8rem;">
+        <p id="wind"></p>
+        <p><img class="weatherIcons" src="wind.png"></p>
+    </div>
+    <div style="display: inline-flex; font-size:.8rem;">
+        <p id="cloudcover"></p>
+        <p><img class="weatherIcons" src="cloud.png"></p>
+    </div>
+    <div style="display: inline-flex; font-size:.8rem;">
+        <p id="visibility"></p>
+        <p><img class="weatherIcons" src="visible.png"></p>
+    </div>
+
+    <div>
+        <p id="coord"></p>
+    </div>
+    <!-- <div>
+        <p id="timezone"></p>
+    </div> -->
+</div>
+
+
+<div id="bottom">
+    <div class="stocks">
+        <p id="stockName">LOADING STOCKS...</p>
+        <p id="price"></p>
+        <p id="oldPrice"></p>
+        <p><img id="icon" src=""></p>
+        <p id="change"></p>
+    </div>
+    <div class="stocks">
+        <p id="stockName2"></p>
+        <p id="price2"></p>
+        <p id="oldPrice2"></p>
+        <p><img id="icon2" src=""></p>
+        <p id="change2"></p>
+    </div>
+    <div class="stocks">
+        <p id="stockName3"></p>
+        <p id="price3"></p>
+        <p id="oldPrice3"></p>
+        <p><img id="icon3" src=""></p>
+        <p id="change3"></p>
+    </div>
+    <div class="stocks">
+        <p id="stockName4"></p>
+        <p id="price4"></p>
+        <p id="oldPrice4"></p>
+        <p><img id="icon4" src=""></p>
+        <p id="change4"></p>
+    </div>
+   
+</div>
+
+<div id="yahoo">
+      <p>Yahoo! Finance</p>  
+</div>
+
+
+<body>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <script src="bing.js"></script>
+
+</body>
+
+</html>
